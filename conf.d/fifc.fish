@@ -11,8 +11,7 @@ if status is-interactive
         bind --mode $mode $fifc_keybinding _fifc
     end
 
-    # Only load fifc rules when fish is launched fzf
-else if set -q _fifc_launched_by_fzf
+else
     # Private
     set -gx _fifc_comp_count 0
     set -gx _fifc_unordered_comp
