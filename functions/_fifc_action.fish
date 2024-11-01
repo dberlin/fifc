@@ -21,18 +21,19 @@ function _fifc_action
     else if test "$action" = source
         set default_source 1
     end
-    for comppart in $comp
+
+    for i in (seq (count $comp))
         set -l condition_cmd
         set -l regex_cmd
         set -l valid 1
-        if test -n "$$comppart[1]"
-            set condition_cmd "$$comppart[1]"
+        if test -n "$$comp[$i][1]"
+            set condition_cmd "$$comp[$i][1]"
         else
             set condition_cmd true
         end
-        if test -n "$$compppart[2]"
+        if test -n "$$comp[$i][2]"
             set -l val (string escape -- "$fifc_commandline")
-            set regex_cmd "string match --regex --quiet -- '$$comppart[2]' $val"
+            set regex_cmd "string match --regex --quiet -- '$$comp[$i][2]' $val"
         else
             set regex_cmd true
         end
@@ -42,21 +43,21 @@ function _fifc_action
             continue
         end
 
-        set _fifc_extract_regex "$$comppart[7]"
+        set _fifc_extract_regex "$$comp[$i][7]"
 
-        if test "$action" = preview; and test -n "$$comppart[3]"
-            eval $$comppart[3]
+        if test "$action" = preview; and test -n "$$comp[$i][3]"
+            eval $$comp[$i][3]
             set default_preview 0
             break
-        else if test "$action" = open; and test -n "$$comppart[4]"
-            eval $$comppart[4]
+        else if test "$action" = open; and test -n "$$comp[$i][4]"
+            eval $$comp[$i][4]
             break
-        else if test "$action" = source; and test -n "$$comppart[5]"
-            set _fifc_custom_fzf_opts "$$comppart[6]"
-            if functions "$$comppart[5]" 1>/dev/null
-                eval $$comppart[5]
+        else if test "$action" = source; and test -n "$$comp[$i][5]"
+            set _fifc_custom_fzf_opts "$$comp[$i][6]"
+            if functions "$$comp[$i][5]" 1>/dev/null
+                eval $$comp[$i][5]
             else
-                echo $$comppart[5]
+                echo $$comp[$i][5]
             end
             set default_source 0
             break
