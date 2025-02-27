@@ -63,16 +63,16 @@ function _fifc
         end
     end
 
-    # Add space trailing space only if:
-    # - there is no trailing space already present
-    # - Result is not a directory
-    # We need to unescape $result for directory test as we escaped it before
-    if test (count $result) -eq 1; and not test -d (string unescape -- $result[1])
-        set -l buffer (string split -- "$fifc_commandline" (commandline -b))
-        if not string match -- ' *' "$buffer[2]"
-            set -a result ''
-        end
-    end
+    ## Add space trailing space only if:
+    ## - there is no trailing space already present
+    ## - Result is not a directory
+    ## We need to unescape $result for directory test as we escaped it before
+    #if test (count $result) -eq 1; and not test -d (string unescape -- $result[1])
+    #    set -l buffer (string split -- "$fifc_commandline" (commandline -b))
+    #    if not string match -- ' *' "$buffer[2]"
+    #        set -a result ''
+    #    end
+    #end
 
     if test -n "$result"
         commandline --replace --current-token -- (string join -- ' ' $result)
