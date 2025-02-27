@@ -16,6 +16,7 @@ if status is-interactive
         bind --mode $mode $fifc_keybinding _fifc
     end
 
+    # Set sources rules
     fifc \
         -n 'test "$fifc_group" = "directories"' \
         -s _fifc_source_directories
@@ -58,6 +59,7 @@ if set -q _fifc_launched_by_fzf
         -o _fifc_open_process \
         -e '^\\h*([0-9]+)'
 end
+
 
 # Fisher
 function _fifc_uninstall --on-event fifc_uninstall
